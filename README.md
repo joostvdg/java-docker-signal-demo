@@ -163,6 +163,19 @@ This means you probably should bake the process manager into your image.
 
 Unless it doesn't work for you or your app, I recommend to always use Alpine.
 
+#### Debian
+
+```dockerfile
+FROM debian:stable-slim
+ENV TINI_VERSION v0.18.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+ENTRYPOINT ["/tini", "-vv","-g", "--", "/usr/bin/dui/bin/dui","-XX:+UseCGroupMemoryLimitForHeap", "-XX:+UnlockExperimentalVMOptions"]
+COPY --from=build /usr/bin/dui-image/ /usr/bin/dui
+```
+
+#### Alpine
+
 ```dockerfile
 FROM alpine
 RUN apk add --no-cache tini
