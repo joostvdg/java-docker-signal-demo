@@ -47,6 +47,5 @@ LABEL authors="Joost van der Griendt <joostvdg@gmail.com>"
 LABEL version="0.1.0"
 LABEL description="Docker image for playing with java applications for graceful shutdown with Docker & Kubernetes."
 ENV DATE_CHANGED="20180728-2355"
-RUN apk add --no-cache tini
-ENTRYPOINT ["/sbin/tini", "-vv","-g", "--", "/usr/bin/signal/bin/signal","-XX:+UseCGroupMemoryLimitForHeap", "-XX:+UnlockExperimentalVMOptions"]
+ENTRYPOINT ["/usr/bin/signal/bin/signal","-XX:+UseCGroupMemoryLimitForHeap", "-XX:+UnlockExperimentalVMOptions"]
 COPY --from=signalbuild /usr/bin/signal-image/ /usr/bin/signal
