@@ -131,6 +131,30 @@ Load average: 0.00 0.02 0.00 1/405 6
 
 No surprise there, we now have two processes. One of them is our tini process, which seemingly has executed our Entrypoint.
 
+#### Docker Compose
+
+```yaml
+version: '2.2'
+services:
+    web:
+        image: caladreas/java-docker-signal-demo:no-tini
+        init: true
+```
+
+> Requires `docker-compose` and `docker` runtime **v1.13+**
+
+#### Docker Swarm
+
+```yaml
+version: '3.7'
+services:
+    web:
+        image: caladreas/java-docker-signal-demo:no-tini
+        init: true
+```
+
+> Requires docker engine in `swarm mode` and `docker` runtime **v18.06+**
+
 ### Manual
 
 Now, this is fine you run your containers with manual commands. But in practice you should generally use a orchestrator such as Swarm or Kubernetes.
